@@ -2,13 +2,14 @@ package example.olegostanin.motoworkshop.services.map;
 
 import example.olegostanin.motoworkshop.model.Mechanic;
 import example.olegostanin.motoworkshop.services.CrudService;
+import example.olegostanin.motoworkshop.services.MechanicService;
 
 import java.util.Set;
 
 /**
  * Created by jt on 7/21/18.
  */
-public class MechanicServiceMap extends AbstractMapService<Mechanic, Long> implements CrudService<Mechanic, Long> {
+public class MechanicServiceMap extends AbstractMapService<Mechanic, Long> implements MechanicService {
 
     @Override
     public Set<Mechanic> findAll() {

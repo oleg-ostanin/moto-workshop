@@ -1,14 +1,14 @@
 package example.olegostanin.motoworkshop.services.map;
 
 import example.olegostanin.motoworkshop.model.Owner;
-import example.olegostanin.motoworkshop.services.CrudService;
+import example.olegostanin.motoworkshop.services.OwnerService;
 
 import java.util.Set;
 
 /**
  * Created by jt on 7/21/18.
  */
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements CrudService<Owner, Long> {
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 
     @Override
     public Set<Owner> findAll() {
@@ -33,5 +33,10 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
     @Override
     public void deleteById(Long id) {
         super.deleteById(id);
+    }
+
+    @Override
+    public Owner findByLastName(String lastName) {
+        return null;
     }
 }

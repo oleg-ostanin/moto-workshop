@@ -2,13 +2,14 @@ package example.olegostanin.motoworkshop.services.map;
 
 import example.olegostanin.motoworkshop.model.Vehicle;
 import example.olegostanin.motoworkshop.services.CrudService;
+import example.olegostanin.motoworkshop.services.VehicleService;
 
 import java.util.Set;
 
 /**
  * Created by jt on 7/21/18.
  */
-public class VehicleServiceMap extends AbstractMapService<Vehicle, Long> implements CrudService<Vehicle, Long> {
+public class VehicleServiceMap extends AbstractMapService<Vehicle, Long> implements VehicleService {
     @Override
     public Set<Vehicle> findAll() {
         return super.findAll();
