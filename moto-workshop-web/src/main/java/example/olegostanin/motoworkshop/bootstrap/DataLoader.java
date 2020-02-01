@@ -15,9 +15,9 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final MechanicService mechanicService;
 
-    public DataLoader() {
-        ownerService = new OwnerServiceMap();
-        mechanicService = new MechanicServiceMap();
+    public DataLoader(OwnerService ownerService, MechanicService mechanicService) {
+        this.ownerService = ownerService;
+        this.mechanicService = mechanicService;
     }
 
     @Override

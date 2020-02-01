@@ -2,12 +2,14 @@ package example.olegostanin.motoworkshop.services.map;
 
 import example.olegostanin.motoworkshop.model.Owner;
 import example.olegostanin.motoworkshop.services.OwnerService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 /**
  * Created by jt on 7/21/18.
  */
+@Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 
     @Override
