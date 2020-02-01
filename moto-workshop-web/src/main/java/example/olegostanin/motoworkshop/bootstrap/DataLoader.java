@@ -50,7 +50,7 @@ public class DataLoader implements CommandLineRunner {
         mechanic2.setFirstName("Jessie");
         mechanic2.setLastName("Porter");
 
-        mechanicService.save(mechanic1);
+        mechanicService.save(mechanic2);
 
         System.out.println("Loaded Mechanics....");
     }
