@@ -24,7 +24,7 @@ public class VehicleServiceMap extends AbstractMapService<Vehicle, Long> impleme
 
     @Override
     public Vehicle save(Vehicle object) {
-        return super.save(object.getId(), object);
+        return super.save(object);
     }
 
     @Override
