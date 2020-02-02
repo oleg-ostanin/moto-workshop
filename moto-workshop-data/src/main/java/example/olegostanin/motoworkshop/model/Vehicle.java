@@ -7,9 +7,18 @@ import java.time.LocalDate;
  */
 public class Vehicle extends BaseEntity{
 
+    private String regNumber;
     private VehicleType vehicleType;
     private Owner owner;
     private LocalDate productionDate;
+
+    public String getRegNumber() {
+        return regNumber;
+    }
+
+    public void setRegNumber(String regNumber) {
+        this.regNumber = regNumber;
+    }
 
     public VehicleType getVehicleType() {
         return vehicleType;

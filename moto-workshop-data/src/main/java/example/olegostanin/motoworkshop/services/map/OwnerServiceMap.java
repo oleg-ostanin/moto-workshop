@@ -1,7 +1,10 @@
 package example.olegostanin.motoworkshop.services.map;
 
 import example.olegostanin.motoworkshop.model.Owner;
+import example.olegostanin.motoworkshop.model.Vehicle;
 import example.olegostanin.motoworkshop.services.OwnerService;
+import example.olegostanin.motoworkshop.services.VehicleService;
+import example.olegostanin.motoworkshop.services.VehicleTypeService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -11,6 +14,14 @@ import java.util.Set;
  */
 @Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+
+    private final VehicleTypeService vehicleTypeService;
+    private final VehicleService vehicleService;
+
+    public OwnerServiceMap(VehicleTypeService vehicleTypeService, VehicleService vehicleService) {
+        this.vehicleTypeService = vehicleTypeService;
+        this.vehicleService = vehicleService;
+    }
 
     @Override
     public Set<Owner> findAll() {
@@ -24,7 +35,29 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner save(Owner object) {
-        return super.save(object);
+        if(object != null){
+            if (object.getVehicles() != null) {
+                object.getVehicles().forEach(vehicle -> {
+                    if (vehicle.getVehicleType() != null){
+                        if(vehicle.getVehicleType().getId() == null){
+                            vehicle.setVehicleType(vehicleTypeService.save(vehicle.getVehicleType()));
+                        }
+                    } else {
+                        throw new RuntimeException("Vehicle Type is required");
+                    }
+
+                    if(vehicle.getId() == null){
+                        Vehicle savedVehicle = vehicleService.save(vehicle);
+                        vehicle.setId(savedVehicle.getId());
+                    }
+                });
+            }
+
+            return super.save(object);
+
+        } else {
+            return null;
+        }
     }
 
     @Override
