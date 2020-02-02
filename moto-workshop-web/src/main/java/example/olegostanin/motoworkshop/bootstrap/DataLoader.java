@@ -2,10 +2,12 @@ package example.olegostanin.motoworkshop.bootstrap;
 
 import example.olegostanin.motoworkshop.model.Mechanic;
 import example.olegostanin.motoworkshop.model.Owner;
+import example.olegostanin.motoworkshop.model.Speciality;
 import example.olegostanin.motoworkshop.model.Vehicle;
 import example.olegostanin.motoworkshop.model.VehicleType;
 import example.olegostanin.motoworkshop.services.MechanicService;
 import example.olegostanin.motoworkshop.services.OwnerService;
+import example.olegostanin.motoworkshop.services.SpecialtyService;
 import example.olegostanin.motoworkshop.services.VehicleTypeService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -18,16 +20,27 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final MechanicService mechanicService;
     private final VehicleTypeService vehicleTypeService;
+    private final SpecialtyService specialtyService;
 
-    public DataLoader(OwnerService ownerService, MechanicService mechanicService, VehicleTypeService vehicleTypeService) {
+    public DataLoader(OwnerService ownerService, MechanicService mechanicService, VehicleTypeService vehicleTypeService,
+                      SpecialtyService specialtyService) {
         this.ownerService = ownerService;
         this.mechanicService = mechanicService;
         this.vehicleTypeService = vehicleTypeService;
+        this.specialtyService = specialtyService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        int count = vehicleTypeService.findAll().size();
 
+        if (count == 0 ){
+            loadData();
+        }
+
+    }
+
+    private void loadData() {
         VehicleType motorcycle = new VehicleType();
         motorcycle.setName("Motorcycle");
         VehicleType savedMotorcycleType = vehicleTypeService.save(motorcycle);
@@ -35,6 +48,18 @@ public class DataLoader implements CommandLineRunner {
         VehicleType scooter = new VehicleType();
         scooter.setName("Scooter");
         VehicleType savedScooterType = vehicleTypeService.save(scooter);
+
+        Speciality electricity = new Speciality();
+        electricity.setDescription("Electricity");
+        Speciality savedElectricity = specialtyService.save(electricity);
+
+        Speciality fuelSystem = new Speciality();
+        fuelSystem.setDescription("Fuel system");
+        Speciality savedFuelSystem = specialtyService.save(fuelSystem);
+
+        Speciality engine = new Speciality();
+        engine.setDescription("Engine");
+        Speciality savedDentistry = specialtyService.save(engine);
 
         Owner owner1 = new Owner();
         owner1.setFirstName("Michael");
@@ -73,12 +98,15 @@ public class DataLoader implements CommandLineRunner {
         Mechanic mechanic1 = new Mechanic();
         mechanic1.setFirstName("Sam");
         mechanic1.setLastName("Axe");
+        mechanic1.getSpecialities().add(savedElectricity);
+
 
         mechanicService.save(mechanic1);
 
         Mechanic mechanic2 = new Mechanic();
         mechanic2.setFirstName("Jessie");
         mechanic2.setLastName("Porter");
+        mechanic2.getSpecialities().add(savedFuelSystem);
 
         mechanicService.save(mechanic2);
 

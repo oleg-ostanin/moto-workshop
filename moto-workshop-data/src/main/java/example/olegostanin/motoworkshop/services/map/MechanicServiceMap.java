@@ -1,8 +1,10 @@
 package example.olegostanin.motoworkshop.services.map;
 
 import example.olegostanin.motoworkshop.model.Mechanic;
+import example.olegostanin.motoworkshop.model.Speciality;
 import example.olegostanin.motoworkshop.services.CrudService;
 import example.olegostanin.motoworkshop.services.MechanicService;
+import example.olegostanin.motoworkshop.services.SpecialtyService;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -12,6 +14,11 @@ import java.util.Set;
  */
 @Service
 public class MechanicServiceMap extends AbstractMapService<Mechanic, Long> implements MechanicService {
+    private final SpecialtyService specialtyService;
+
+    public MechanicServiceMap(SpecialtyService specialtyService) {
+        this.specialtyService = specialtyService;
+    }
 
     @Override
     public Set<Mechanic> findAll() {
@@ -25,6 +32,15 @@ public class MechanicServiceMap extends AbstractMapService<Mechanic, Long> imple
 
     @Override
     public Mechanic save(Mechanic object) {
+
+        if (object.getSpecialities().size() > 0){
+            object.getSpecialities().forEach(speciality -> {
+                if(speciality.getId() == null){
+                    Speciality savedSpecialty = specialtyService.save(speciality);
+                    speciality.setId(savedSpecialty.getId());
+                }
+            });
+        }
         return super.save(object);
     }
 
