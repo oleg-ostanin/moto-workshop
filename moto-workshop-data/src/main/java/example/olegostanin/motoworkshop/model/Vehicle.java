@@ -1,11 +1,15 @@
 package example.olegostanin.motoworkshop.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "vehicles")
@@ -24,6 +28,9 @@ public class Vehicle extends BaseEntity{
 
     @Column(name = "production_date")
     private LocalDate productionDate;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicle")
+    private Set<Visit> vists = new HashSet<>();
 
     public String getRegNumber() {
         return regNumber;
