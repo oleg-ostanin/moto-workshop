@@ -2,11 +2,13 @@ package example.olegostanin.motoworkshop.services.map;
 
 import example.olegostanin.motoworkshop.model.VehicleType;
 import example.olegostanin.motoworkshop.services.VehicleTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "map"})
 public class VehicleTypeMapService extends AbstractMapService<VehicleType, Long> implements VehicleTypeService {
 
     @Override

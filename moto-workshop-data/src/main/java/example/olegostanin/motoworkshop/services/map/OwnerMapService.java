@@ -5,6 +5,7 @@ import example.olegostanin.motoworkshop.model.Vehicle;
 import example.olegostanin.motoworkshop.services.OwnerService;
 import example.olegostanin.motoworkshop.services.VehicleService;
 import example.olegostanin.motoworkshop.services.VehicleTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -13,6 +14,7 @@ import java.util.Set;
  * Created by jt on 7/21/18.
  */
 @Service
+@Profile({"default", "map"})
 public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
 
     private final VehicleTypeService vehicleTypeService;

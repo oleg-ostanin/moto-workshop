@@ -1,14 +1,7 @@
 package example.olegostanin.motoworkshop.bootstrap;
 
-import example.olegostanin.motoworkshop.model.Mechanic;
-import example.olegostanin.motoworkshop.model.Owner;
-import example.olegostanin.motoworkshop.model.Speciality;
-import example.olegostanin.motoworkshop.model.Vehicle;
-import example.olegostanin.motoworkshop.model.VehicleType;
-import example.olegostanin.motoworkshop.services.MechanicService;
-import example.olegostanin.motoworkshop.services.OwnerService;
-import example.olegostanin.motoworkshop.services.SpecialtyService;
-import example.olegostanin.motoworkshop.services.VehicleTypeService;
+import example.olegostanin.motoworkshop.model.*;
+import example.olegostanin.motoworkshop.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -21,13 +14,15 @@ public class DataLoader implements CommandLineRunner {
     private final MechanicService mechanicService;
     private final VehicleTypeService vehicleTypeService;
     private final SpecialtyService specialtyService;
+    private final VisitService visitService;
 
     public DataLoader(OwnerService ownerService, MechanicService mechanicService, VehicleTypeService vehicleTypeService,
-                      SpecialtyService specialtyService) {
+                      SpecialtyService specialtyService, VisitService visitService) {
         this.ownerService = ownerService;
         this.mechanicService = mechanicService;
         this.vehicleTypeService = vehicleTypeService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -93,13 +88,19 @@ public class DataLoader implements CommandLineRunner {
 
         ownerService.save(owner2);
 
+        Visit catVisit = new Visit();
+        catVisit.setVehicle(fionasScooter);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Engine issues");
+
+        visitService.save(catVisit);
+
         System.out.println("Loaded Owners....");
 
         Mechanic mechanic1 = new Mechanic();
         mechanic1.setFirstName("Sam");
         mechanic1.setLastName("Axe");
         mechanic1.getSpecialities().add(savedElectricity);
-
 
         mechanicService.save(mechanic1);
 

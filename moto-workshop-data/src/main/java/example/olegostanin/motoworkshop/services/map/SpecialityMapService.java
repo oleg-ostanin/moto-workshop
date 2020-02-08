@@ -2,6 +2,7 @@ package example.olegostanin.motoworkshop.services.map;
 
 import example.olegostanin.motoworkshop.model.Speciality;
 import example.olegostanin.motoworkshop.services.SpecialtyService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -10,6 +11,7 @@ import java.util.Set;
  * Created by jt on 7/31/18.
  */
 @Service
+@Profile({"default", "map"})
 public class SpecialityMapService extends AbstractMapService<Speciality, Long> implements SpecialtyService {
 
     @Override
