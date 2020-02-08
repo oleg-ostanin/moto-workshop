@@ -13,10 +13,10 @@ import java.util.Set;
  * Created by jt on 7/21/18.
  */
 @Service
-public class MechanicServiceMap extends AbstractMapService<Mechanic, Long> implements MechanicService {
+public class MechanicMapService extends AbstractMapService<Mechanic, Long> implements MechanicService {
     private final SpecialtyService specialtyService;
 
-    public MechanicServiceMap(SpecialtyService specialtyService) {
+    public MechanicMapService(SpecialtyService specialtyService) {
         this.specialtyService = specialtyService;
     }
 

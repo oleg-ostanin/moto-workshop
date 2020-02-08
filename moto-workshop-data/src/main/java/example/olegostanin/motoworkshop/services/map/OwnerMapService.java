@@ -13,12 +13,12 @@ import java.util.Set;
  * Created by jt on 7/21/18.
  */
 @Service
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
 
     private final VehicleTypeService vehicleTypeService;
     private final VehicleService vehicleService;
 
-    public OwnerServiceMap(VehicleTypeService vehicleTypeService, VehicleService vehicleService) {
+    public OwnerMapService(VehicleTypeService vehicleTypeService, VehicleService vehicleService) {
         this.vehicleTypeService = vehicleTypeService;
         this.vehicleService = vehicleService;
     }
